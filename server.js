@@ -1,13 +1,15 @@
-const http = require('http');
+const express = require("express");
+const app = express();
+const PORT = process.env.PORT = 3000;
 
-const port = 3000
+let router = express.Router();
 
-const server = http.createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World\n');
+router.get('/api',function(req,res){
+  res.json({'message' : 'Ping Successfull'});
 });
 
-server.listen(port, () => {
-  console.log(`Server running at ${port}/`);
+app.use('/',router);
+
+app.listen(PORT,function(){
+  console.log('Server is running at PORT:',PORT);
 });
