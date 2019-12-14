@@ -1,0 +1,7 @@
+version: '2'
+
+services:
+    mysql:
+      image: jbmarflo/docker-web:mysql
+      build:
+        context: ./docker

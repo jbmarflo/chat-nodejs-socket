@@ -6,7 +6,7 @@
 
 > "start": "npm run init-db && npx nodemon --exec babel-node server.js",
 > "sequelize-skeleton": "npx sequelize init:models; npx sequelize init:config",
-> "init-db": "cd DIR_WHERE_MYSQL_BIN_IS && echo 'DROP DATABASE IF EXISTS api_node_demo; CREATE DATABASE api_node_demo CHARACTER SET utf8 COLLATE utf8_general_ci' | ./mysql -u root && cd -"
-
+> docker-compose -f docker-compose.build.yml build
+> docker-compose -f docker-compose.yml up -d
 
 npm run sequelize-skeleton

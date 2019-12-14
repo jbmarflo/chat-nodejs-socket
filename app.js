@@ -1,14 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const express = require("express");
+const app = express();
+const router = require('./router.js');
+const Parse = require('body-parser')
 
-// Home page route.
-router.get('/', function (req, res) {
-  res.send('Wiki home page');
-})
+app.use(Parse.json())
+app.use('/',router);
 
-// About page route.
-router.get('/about', function (req, res) {
-  res.send('About this wiki');
-})
-
-module.exports = router;
+module.exports = app;

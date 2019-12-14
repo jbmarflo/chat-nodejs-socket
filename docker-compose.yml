@@ -1,0 +1,13 @@
+version: '2'
+
+services:
+  mysql:
+    image: jbmarflo/docker-web:mysql
+    environment:
+     MYSQL_ROOT_PASSWORD: 1234
+     MYSQL_DATABASE: chat_local
+    ports:
+     - 3306:3306
+    volumes:
+     - ./docker/database:/docker-entrypoint-initdb.d
+    command: mysqld --sql_mode=""
