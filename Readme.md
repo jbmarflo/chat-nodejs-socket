@@ -10,3 +10,8 @@
 > docker-compose -f docker-compose.yml up -d
 
 npm run sequelize-skeleton
+
+
+
+sudo sequelize-auto -c "." -o "./src/domain/model" -d chat_local -h localhost -u root -p 3306 -x 1234 -e mysql
+sudo sequelize-auto -c "./config" -d chat_local -h localhost -u root -p 3306 -x 1234 -e mysql

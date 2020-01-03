@@ -18,5 +18,8 @@ module.exports = class MessageService {
         return 'Guardado satisfactoriamente'
     }
 
-
+    async getAll (groupId) {
+        const message = await this.reposity.getAll(groupId)
+        return message
+    }
 }

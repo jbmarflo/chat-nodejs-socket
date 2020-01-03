@@ -1,7 +1,7 @@
 const messageRequest = require('../src/application/request/MessageRequest.js')
 const messageFactory = require('../src/application/factory/MessageFactory.js')
 
-module.exports = class MeesageController { 
+module.exports = class MessageController {
 
 	// post
 	create (req, res) {
@@ -20,8 +20,15 @@ module.exports = class MeesageController {
 
 
 	// get
-	getAll () {
+	async getAll (req, res) {
+		/*const User = require('../src/domain/model').user
+        const listuser = await User.findAll()*/
+        const MessageFactoryObj =  new messageFactory()
 
+        res.status(200).send({
+			data: await MessageFactoryObj.getAll(req.params.id) || [],
+            message: 'se listo correctamente'
+        });
 	}
 
 	// delete
