@@ -1,10 +1,22 @@
 const Repository = require('../../common/repository/Repository.js')
 
-module.exports = class MessageSequelize extends Repository{
-    async getAll (groupId) {
-        return await this.model.findAll({
+module.exports = class UserSequelize extends Repository{
+    async register (user) {
+        return await this.model.create(user)
+    }
+
+    async getByUsername(username) {
+        return await this.model.findOne({
             where: {
-                groups_id: groupId
+                username: username
+            }
+        })
+    }
+
+    async getByEmail(email) {
+        return await this.model.findOne({
+            where: {
+                email: email
             }
         })
     }

@@ -1,4 +1,6 @@
-module.exports = class MessageService {
+const UserEntity = require('../../domain/entity/userEntity.js')
+
+module.exports = class UserService {
 
     constructor (repository) {
 
@@ -6,20 +8,40 @@ module.exports = class MessageService {
 
     }
 
-    create (request) {
+    async register (request) {
 
-        const getGroup = ''
-        const getUser = ''
-        const Message = ''
+        const verifyUserExist = await this.reposity.getByUsername(request.username)
+        const verifyEmailExist = await this.reposity.getByEmail(request.email)
 
-        // Guardar
-        // this.reposity.save()
+        if (verifyUserExist || verifyEmailExist) {
+            console.log('Existe el usuario')
+            return false
+        }
 
-        return 'Guardado satisfactoriamente'
+        await this.reposity.register(UserEntity.build(request.username, request.name, request.lastname, request.password, request.email))
+
+        return true
     }
 
-    async getAll (groupId) {
-        const message = await this.reposity.getAll(groupId)
-        return message
+    async login (username, password) {
+        const user = await this.reposity.getByUsername(username)
+
+        if (!user) {
+            console.log('No existe el usuario')
+            return false
+        }
+
+        if (!UserEntity.verifyPassword(password, user.password)) {
+            console.log('Password incorrecto')
+            return false
+        }
+
+        return {
+            data: user,
+            token: '4547875'
+        }
+
     }
+
+
 }
