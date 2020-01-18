@@ -4,10 +4,11 @@ const UserSequelize =  require('../../infrastructure/database/UserSequelize.js')
 module.exports = class UserFactory {
 
 	constructor () {
-		this.service = new UserService(new UserSequelize(require('../../domain/model').user))
+        this.service = new UserService(new UserSequelize(require('../../domain/model').user))
+    }
 	
 
-	async register (request) {
+	async register(request) {
 		return this.service.register(request)
 	}
 
