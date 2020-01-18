@@ -17,8 +17,6 @@ module.exports = class MessageController {
 			message: mesdage
 		});
 	}
-
-
 	// get
 	async getAll (req, res) {
 		/*const User = require('../src/domain/model').user

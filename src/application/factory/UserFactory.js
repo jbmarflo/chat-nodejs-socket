@@ -1,9 +1,9 @@
 const MessageService =  require('../service/MessageService.js')
 const MessageSequelize =  require('../../infrastructure/database/MessageSequelize.js')
-module.exports = class MessageFactory {
+module.exports = class UserFactory {
 
 	constructor () {
-		this.service = new MessageService(new MessageSequelize(require('../../domain/model').message))
+		this.service = new UserService(new MessageSequelize(require('../../domain/model').message))
 	}
 
 	create (request) {

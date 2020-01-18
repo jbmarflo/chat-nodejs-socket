@@ -1,6 +1,6 @@
-module.exports = class MessageRequest {
+module.exports = class UserRegisterRequest {
 	
-	constructor (groupId, userId, text) {
+	constructor (userId, 	) {
 		this.userId = userId
 		this.groupId = groupId
 		this.text = text 

@@ -1,12 +1,22 @@
-module.exports = class MessageService {
+module.exports = class UserService {
 
-    constructor (repository) {
+    constructor(repository) {
 
         this.reposity = repository
 
     }
+    async register(request) {
+        const verifyUserExist = await this.reposity.getByUsername(request.username)
+        if (verifyUserExist) {
+            console.log('existe el usuario')
+            return false
+        }
+        console.log(UserEntry.build(request.username, request.name, request.password))
+        await this.reposity.register(UserEntry.buidl(request.username, request.name, request.password))
+        return
+    }
 
-    create (request) {
+    create(request) {
 
         const getGroup = ''
         const getUser = ''
@@ -18,7 +28,7 @@ module.exports = class MessageService {
         return 'Guardado satisfactoriamente'
     }
 
-    async getAll (groupId) {
+    async getAll(groupId) {
         const message = await this.reposity.getAll(groupId)
         return message
     }
