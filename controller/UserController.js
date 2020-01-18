@@ -1,39 +1,42 @@
-const messageRequest = require('../src/application/request/MessageRequest.js')
-const messageFactory = require('../src/application/factory/MessageFactory.js')
+const userRegisterRequest = require('../src/application/request/UserRegisterRequest.js')
+const UserFactory = require('../src/application/factory/UserFactory.js')
 
-module.exports = class MessageController {
+module.exports = class UserController {
 
-	// post
-	create (req, res) {
-		const MessageFactoryObj =  new messageFactory()
-		const mesdage =  MessageFactoryObj.create(
-            new messageRequest(
-                req.params.id,
-                req.body.userId,
-                req.body.text
-            ))
+    async login (req, res) {
+        const userFactory = new UserFactory()
+        const email = req.body.username
 
+        if (email.length == 0) {
+            res.status(400).send({
+                data: null,
+                message: 'Bad request'
+            });
+        }
+
+        const getUser = await userFactory.login(
+            req.body.username,
+            req.body.password
+        )
         res.status(200).send({
-			message: mesdage
-		});
-	}
-
-
-	// get
-	async getAll (req, res) {
-		/*const User = require('../src/domain/model').user
-        const listuser = await User.findAll()*/
-        const MessageFactoryObj =  new messageFactory()
-
-        res.status(200).send({
-			data: await MessageFactoryObj.getAll(req.params.id) || [],
-            message: 'se listo correctamente'
+            data: getUser,
+            message: 'Se ha logeado satisfactoriamente'
         });
-	}
+    }
 
-	// delete
-	delete () {
+    async register (req, res) {
+       const userFactory = new UserFactory()
+        await userFactory.register(new userRegisterRequest(
+            req.body.username,
+            req.body.name,
+            req.body.lastname,
+            req.body.password,
+            req.body.email
+        ))
 
-	}
+        res.status(200).send({
+            message: 'Se ha registrado satisfactoriamente'
+        });
+    }
 
 }

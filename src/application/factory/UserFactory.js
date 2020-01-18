@@ -1,16 +1,17 @@
-const MessageService =  require('../service/MessageService.js')
-const MessageSequelize =  require('../../infrastructure/database/MessageSequelize.js')
+
+const UserService =  require('../service/UserService.js')
+const UserSequelize =  require('../../infrastructure/database/UserSequelize.js')
 module.exports = class UserFactory {
 
 	constructor () {
-		this.service = new UserService(new MessageSequelize(require('../../domain/model').message))
+		this.service = new UserService(new UserSequelize(require('../../domain/model').user))
+	
+
+	async register (request) {
+		return this.service.register(request)
 	}
 
-	create (request) {
-		return this.service.create(request)
-	}
-
-	async getAll (groupId) {
-		return await this.service.getAll(groupId)
+	async login (username, password) {
+		return await this.service.login(username, password)
 	}
 }
